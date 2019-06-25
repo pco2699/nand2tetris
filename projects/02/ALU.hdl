@@ -56,6 +56,15 @@ CHIP ALU {
     Or16(a=outx, b=outy, out=orxy);
 
     Mux16(a=andxy, b=orxy, sel=f, out=outxy);
+
+    Not16(in=outxy, out=notoutxy);
+    Inc16(in=notoutxy, out=ngoutxy);
+
+    Mux16(a=outxy, b=ngoutxy, sel=no, out=out);
+
+    Not(in=out[15], out=ng);
+    
+
     
 
 
