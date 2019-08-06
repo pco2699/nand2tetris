@@ -17,7 +17,7 @@
     @i
     D=M    // D=i
     @R1
-    D=D-A  // D=i-R1
+    D=D-M  // D=i-R1
     @END
     D;JGT // もし(i-R1)>0ならばENDへ移動
     @R0
