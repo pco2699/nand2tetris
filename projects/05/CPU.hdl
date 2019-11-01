@@ -41,13 +41,18 @@ CHIP CPU {
     PARTS:
     // Register D
     Register(in=, load=, out=);
+    
     // Register A
-    Register(in=muxouta, load=instruction[15], out=regaout);
+    Not(in=instruction[15], out=notOp);
+    Or(a=notOp, b=instruction[5], out=intoA);
+    Register(in=muxouta, load=intoA, out=regaout);
+    Mux16(a=, b=instruction, sel=notOp, out=entryMuxOut);
+
     PC(in=, load=, inc=, reset=reset, out=);
-    // Mux before Register A
-    Mux16(a=, b=, sel=, out=muxouta);
+
     // Mux before ALU 
     Mux16(a=regaout, b=inM, sel=, out=);
     ALU(x=, y=, zx=, nx=, zy=, ny=, f=, no=, out=, zr=, ng=);
     
+    // decoder
 }
